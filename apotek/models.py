@@ -1,5 +1,5 @@
 from django.db import models
-from django.util import timezone
+from django.utils import timezone
 
 # Create your models here.
 
@@ -16,7 +16,8 @@ class User(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     date_of_birth = models.DateField()
-    role = models.ForeignField(Role)
+    register_date = models.DateTimeField()
+    role = models.ForeignKey(Role, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.email
