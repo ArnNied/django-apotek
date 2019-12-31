@@ -92,15 +92,6 @@
 
                 <div class="card p-3 shadow-none">
                     <div class="card-body">
-                        {% if login_error %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ login_error.username|escape }}
-                        </div>
-                        {% endif %}
-
-                        {% for error in login_error %}
-                        {{ error|escape }}
-                        {% endfor %}
                         <h2>LOGIN</h2>
                         <form action="/user/login/" method="post">
                             <div class="form-group my-4 mx-uto">
