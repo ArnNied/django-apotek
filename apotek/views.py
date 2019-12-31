@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-# from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
-from django.core.validators import validate_email
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.models import User
 
@@ -66,10 +64,11 @@ def user_login(request):
             login(request, user)
             if user.is_staff == True:
                 request.session['staff'] = True
-            return redirect('/')
+            return redirect('apotek:index')
 
     else:
-        redirect('/')
+        redirect('apotek:index')
+
 def user_register(request):
     if request.method == 'POST':
         
@@ -96,15 +95,15 @@ def user_register(request):
             
         else:
             form.save()
-        
             user = User.objects.get(username=data['username'])
             login(request, user)
-            
-            return redirect('/')
+
+            return redirect('apotek:index')
+
     else:
         return redirect('apotek:index')
 
 def user_logout(request):
     logout(request)
 
-    return redirect('/user/landing/')
+    return redirect('apotek:user_landing')
