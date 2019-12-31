@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'apotek/navbar.html' %}
+<div class="pt-3">
+    <div class="container-fluid mt-5 aqua-gradient">
+        <div class="row">
+            <div class="col-11 pb-3 mx-auto bg-white">
+                <div class="col-12 mt-4">
+                    <form class="form-inline my-2 my-lg-0" action="/product/search/" method="get">
+                        <input class="form-control ml-auto" type="search" placeholder="Search" aria-label="Search"
+                            name="keyword">
+                        <button class="btn btn-primary btn-md my-2 my-sm-0 ml-3" type="submit"
+                            autocomplete="off">Search</button>
+                    </form>
+                </div>
+                <nav>
+                    <!-- PAGINATION -->
+                </nav>
+                <div class="col-12 p-0">
+                    <div class="card col-sm-12 col-md-4 col-lg-3 mt-4 mx-1 float-left"
+                            style="width: 18.0rem;">
+                            <a class="btn btn-link p-0 mb-0 shadow-sm" href="detail.php?id=<?= $item['id'] ?>">
+                                <img class="card-img-top" src="img/produk/<?= $item['gambar'] ?>"
+                                    alt="<?= $item['nama_produk'] ?>" style="width: 250px; height: 250px;">
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title my-1"><?= $item['nama_produk'] ?></h4>
+                                <ul class="list-unstyled">
+                                    <li class="nav-item">Takaran: <?= $item['takaran'] ?></li>
+                                    <li class="nav-item">Harga: Rp. <?= $item['harga'] ?></li>
+                                    <li class="nav-item">QTY: <?= $item['qty'] ?></li>
+                                </ul>
+                                <?php if($_SESSION['user']['role'] == 1): ?>
+                                <form action="system/product/delete.php" method="get">
+                                    <button type="submit" class="btn btn-danger btn-md mx-auto" name="id"
+                                        value="<?= $item['id'] ?>"
+                                        onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
+                                </form>
+                                <?php else: ?>
+                                <form action="system/product/cart.php" method="post">
+                                    <input class="form-control mx-auto" type="number" placeholder="Jumlah" name="jumlah"
+                                    autocomplete="off">
+                                    <button type="submit" class="btn btn-success btn-md mx-auto w-100" name="cart"
+                                        value="<?= $item['id'] ?>"><i class="fa fa-cart-plus"></i></button>
+                                </form>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

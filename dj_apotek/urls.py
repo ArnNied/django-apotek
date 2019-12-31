@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('totallyasecretlink/', admin.site.urls),
-    # path('', include('apotek.urls'))
+    path('supersecretlink/', admin.site.urls),
+    path('', include('apotek.urls')),
+    path('kelas/', include('kelas_terbuka.urls')),
 ]
