@@ -1,11 +1,14 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
 from . import views
 
 app_name = 'apotek'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('user/landing/', views.user_landing, name='user_landing'),
-    path('user/login/', views.user_login, name='user_login'),
-    path('user/register/', views.user_register, name='user_register'),
-    path('user/logout/', views.user_logout, name='user_logout')
-]
+    path('user/auth/', views.user_auth, name='user_auth'),
+    path('user/logout/', views.user_logout, name='user_logout'),
+    path('<int:page>/', views.index),
+    path('upload/', views.upload)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

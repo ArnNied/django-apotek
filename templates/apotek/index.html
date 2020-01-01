@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 {% include 'apotek/navbar.html' %}
@@ -15,40 +15,61 @@
                             autocomplete="off">Search</button>
                     </form>
                 </div>
+                <!-- PAGINATION -->
                 <nav>
-                    <!-- PAGINATION -->
+                    <ul class="pagination justify-content-center">
+                        {% if active_page != 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="/{{ i }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for i in total_page %}
+                        {% if i == active_page %}
+                        <li class="page-item active"><a class="page-link" href="/{{ i }}/">{{ i }}</a></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="/{{ i }}/">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if active_page != last_page %}
+                        <li class="page-item">
+                            <a class="page-link" href="/{{ last_page }}" aria-label="Previous">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
                 </nav>
                 <div class="col-12 p-0">
-                    <div class="card col-sm-12 col-md-4 col-lg-3 mt-4 mx-1 float-left"
-                            style="width: 18.0rem;">
-                            <a class="btn btn-link p-0 mb-0 shadow-sm" href="detail.php?id=<?= $item['id'] ?>">
-                                <img class="card-img-top" src="img/produk/<?= $item['gambar'] ?>"
-                                    alt="<?= $item['nama_produk'] ?>" style="width: 250px; height: 250px;">
-                                <div class="mask rgba-white-light"></div>
-                            </a>
-                            <div class="card-body">
-                                <h4 class="card-title my-1"><?= $item['nama_produk'] ?></h4>
-                                <ul class="list-unstyled">
-                                    <li class="nav-item">Takaran: <?= $item['takaran'] ?></li>
-                                    <li class="nav-item">Harga: Rp. <?= $item['harga'] ?></li>
-                                    <li class="nav-item">QTY: <?= $item['qty'] ?></li>
-                                </ul>
-                                <?php if($_SESSION['user']['role'] == 1): ?>
-                                <form action="system/product/delete.php" method="get">
-                                    <button type="submit" class="btn btn-danger btn-md mx-auto" name="id"
-                                        value="<?= $item['id'] ?>"
-                                        onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
-                                </form>
-                                <?php else: ?>
-                                <form action="system/product/cart.php" method="post">
-                                    <input class="form-control mx-auto" type="number" placeholder="Jumlah" name="jumlah"
+                    {% for product in products %}
+                    <div class="card col-sm-12 col-md-4 col-lg-3 mt-4 mx-1 float-left" style="width: 18.0rem;">
+                        <a class="btn btn-link p-0 mb-0 shadow-sm" href="/product/detail/{{product.id}}">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}"
+                                style="width: 250px; height: 250px;">
+                            <div class="mask rgba-white-light"></div>
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title my-1">{{ product.name }}</h4>
+                            <ul class="list-unstyled">
+                                <li class="nav-item">Dosage: {{ product.dosage }}</li>
+                                <li class="nav-item">Price: Rp. {{ product.price }}</li>
+                                <li class="nav-item">QTY: {{ product.quantity }}</li>
+                            </ul>
+                            <form action="" method="post">
+                                <input class="form-control mx-auto" type="number" placeholder="Jumlah" name="jumlah"
                                     autocomplete="off">
-                                    <button type="submit" class="btn btn-success btn-md mx-auto w-100" name="cart"
-                                        value="<?= $item['id'] ?>"><i class="fa fa-cart-plus"></i></button>
-                                </form>
-                                <?php endif; ?>
-                            </div>
+                                <button type="submit" class="btn btn-success btn-md mx-auto w-100" name="cart"
+                                    value="{{ product.id }}"><i class="fa fa-cart-plus"></i></button>
+                            </form>
                         </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -28,9 +28,7 @@ class RegisterForm(forms.ModelForm):
         label="Confirm Password",
         min_length=8, 
         max_length=255,
-        widget=forms.PasswordInput(attrs={
-            'class': 'form-control mb-2'
-        })
+        widget=forms.PasswordInput(attrs={'class': 'form-control mb-2'})
     )
 class LoginForm(forms.Form):
     username = forms.CharField(
