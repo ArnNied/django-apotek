@@ -5,29 +5,35 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, SearchForm
 from .models import Product
 from django.contrib.auth.models import User
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.core.cache import caches
 from math import ceil
 
 # Create your views here.
 
 @login_required
-def index(request, page=1):
-    products = Product.objects.all()
-    products2 = products[page*16 - 16:page*16]
+def index(request, page=1, query=''):
+    try:
+        query = request.GET['search']
+        products = Product.objects.filter(Q(name__icontains=query) | Q(tags__icontains=query))
+    except KeyError:
+        products = Product.objects.all()
 
-    last_page = ceil(len(products) / 16)
-
+    paginator = Paginator(products, 2, allow_empty_first_page=True)
+    page = paginator.page(page)
+    
     context = {
         'page_title': "Apotek",
-        'active_page': page,
-        'total_page': range(1, last_page + 1),
-        'last_page': last_page,
-        'products': products2
+        'products': page,
+        'search': SearchForm()
     }
 
     return render(request, 'apotek/index.html', context)
+
 
 def user_auth(request):
     if '_auth_user_hash' in request.session:
@@ -89,8 +95,8 @@ def user_logout(request):
 
     return redirect('apotek:index')
 
-def upload(request):
-    if request.method == 'POST':
-        uploaded_file = request.FILES['file']
+# def upload(request):
+#     if request.method == 'POST':
+#         uploaded_file = request.FILES['file']
 
-    return render(request, 'apotek/upload.html')
+#     return render(request, 'apotek/upload.html')

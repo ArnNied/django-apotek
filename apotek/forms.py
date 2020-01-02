@@ -32,18 +32,22 @@ class RegisterForm(forms.ModelForm):
     )
 class LoginForm(forms.Form):
     username = forms.CharField(
-        widget=forms.TextInput(attrs={
-            'class': 'form-control mb-2'
-        }),
-        required=True
+        widget=forms.TextInput(attrs={'class': 'form-control mb-2'}),
     )
     password = forms.CharField(
         min_length=8, 
         max_length=255,
-        widget=forms.PasswordInput(attrs={
-            'class': 'form-control mb-2'
-        })
+        widget=forms.PasswordInput(attrs={'class': 'form-control mb-2'})
     )
+
+class SearchForm(forms.Form):
+    search=forms.CharField(
+        max_length=255,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Search'}),
+        required=False
+    )
+
+
 
 # class RegisterForm(forms.Form):
 #     first_name = forms.CharField(max_length=255,
