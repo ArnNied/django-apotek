@@ -1,123 +1,135 @@
-{% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
 
-{% block content %}
-<div class="container-fluid aqua-gradient">
-    <div class="row py-3">
+<!DOCTYPE html>
+<html lang="en">
 
-        <div class="card-deck mx-auto text-center">
-            <div class="card shadow-sm pt-5">
-                <img src="{% static 'apotek/img/misc/coins.png' %}" class="mx-auto" width="200">
-                <div class="card-body">
-                    <h4 class="card-title"><b>CHEAP</b></h4>
-                    <p class="card-text">
-                        Our product is sold with a generous price that is accessible to everyone
-                    </p>
-                </div>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-            <div class="card shadow-sm pt-5">
-                <img src="{% static 'apotek/img/misc/clock.png' %}" class="mx-auto" width="200">
-                <div class="card-body">
-                    <h4 class="card-title"><b>FAST</b></h4>
-                    <p class="card-text">
-                        Our product will be delivered as fast as possible with a highly trained personnel to preserve
-                        the product quality
-                    </p>
-                </div>
-            </div>
+    <link rel="shortcut icon" href="{% static 'apotek/img/misc/favicon.ico' %}">
 
-            <div class="card shadow-sm pt-5">
-                <img src="{% static 'apotek/img/misc/reliability.png' %}" class="mx-auto" width="200">
-                <div class="card-body">
-                    <h4 class="card-title"><b>RELIABLE</b></h4>
-                    <p class="card-text">
-                        Our customer service is ready to help 24/7 with a trained personnel to handle various problems
-                    </p>
-                </div>
-            </div>
-        </div>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css">
 
-    </div>
-    <div class="row">
+    <title>Apotek</title>
+</head>
 
-        <div class="col-12">
-            <div class="row">
+<body>
+    <div class="container-fluid aqua-gradient">
+        <div class="row py-3">
 
-            </div>
-            <div class="card-group">
-                <div class="card p-3 shadow-none">
+            <div class="card-deck mx-auto text-center">
+                <div class="card shadow-sm pt-5">
+                    <img src="{% static 'apotek/img/misc/coins.png' %}" class="mx-auto" width="200">
                     <div class="card-body">
-                        <div class="col">
-                        </div>
-                        <h2>REGISTER</h2>
-                        <form action="/user/auth/" method="post">
-                            {% csrf_token %}
-                            <div class="form-group my-4 mx-auto">
-
-                                <label class="mt-1"> {{ register_form.first_name.label }} </label>
-                                {{ register_form.first_name }}
-                                {{ register_error.first_name }}
-
-                                <label class="mt-1"> {{ register_form.last_name.label }} </label>
-                                {{ register_form.last_name }}
-                                {{ register_error.last_name }}
-
-                                <label class="mt-1"> {{ register_form.username.label }} </label>
-                                {{ register_form.username }}
-                                {{ register_error.username }}
-
-                                <label class="mt-1"> {{ register_form.email.label }} </label>
-                                {{ register_form.email }}
-                                {{ register_error.email }}
-
-                                <label class="mt-1"> {{ register_form.password.label }} </label>
-                                {{ register_form.password }}
-                                {{ register_error.password }}
-
-                                <label class="mt-1"> {{ register_form.conpassword.label }} </label>
-                                {{ register_form.conpassword }}
-                                {{ register_error.conpassword }}
-
-                                <button class="btn btn-primary mx-auto mt-3 w-100" type="submit"
-                                    name="register">REGISTER</button>
-                            </div>
-                        </form>
-
+                        <h4 class="card-title"><b>CHEAP</b></h4>
+                        <p class="card-text">
+                            Our product is sold with a generous price that is accessible to everyone
+                        </p>
                     </div>
                 </div>
 
-                <div class="card p-3 shadow-none">
+                <div class="card shadow-sm pt-5">
+                    <img src="{% static 'apotek/img/misc/clock.png' %}" class="mx-auto" width="200">
                     <div class="card-body">
-                        <h2>LOGIN</h2>
-                        <form action="/user/auth/" method="post">
-                            <div class="form-group my-4 mx-uto">
+                        <h4 class="card-title"><b>FAST</b></h4>
+                        <p class="card-text">
+                            Our product will be delivered as fast as possible with a highly trained personnel to
+                            preserve
+                            the product quality
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm pt-5">
+                    <img src="{% static 'apotek/img/misc/reliability.png' %}" class="mx-auto" width="200">
+                    <div class="card-body">
+                        <h4 class="card-title"><b>RELIABLE</b></h4>
+                        <p class="card-text">
+                            Our customer service is ready to help 24/7 with a trained personnel to handle various
+                            problems
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-12">
+                <div class="row">
+
+                </div>
+                <div class="card-group">
+                    <div class="card p-3 shadow-none">
+                        <div class="card-body">
+                            <div class="col">
+                            </div>
+                            <h2>REGISTER</h2>
+                            <form action="/user/auth/" method="post">
                                 {% csrf_token %}
+                                <div class="form-group my-4 mx-auto">
+                                    <label class="mt-1"> {{ register_form.username.label }} </label>
+                                    {{ register_form.username }}
+                                    {{ register_error.username }}
 
-                                <label class="mt-1"> {{ login_form.username.label }} </label>
-                                {{ login_form.username }}
-                                {{ login_error.username|escape }}
+                                    <label class="mt-1"> {{ register_form.email.label }} </label>
+                                    {{ register_form.email }}
+                                    {{ register_error.email }}
 
-                                <label class="mt-1"> {{ login_form.password.label }} </label>
-                                {{ login_form.password }}
-                                {{ login_error.password }}
-                                <button class="btn btn-primary mx-auto mt-3 w-100" type="submit"
-                                    name="login">LOGIN</button>
-                            </div>
-                        </form>
+                                    <label class="mt-1"> {{ register_form.password.label }} </label>
+                                    {{ register_form.password }}
+                                    {{ register_error.password }}
+
+                                    <label class="mt-1"> {{ register_form.conpassword.label }} </label>
+                                    {{ register_form.conpassword }}
+                                    {{ register_error.conpassword }}
+
+                                    <button class="btn btn-primary mx-auto mt-3 w-100" type="submit"
+                                        name="register">REGISTER</button>
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
-                </div>
 
+                    <div class="card p-3 shadow-none">
+                        <div class="card-body">
+                            <h2>LOGIN</h2>
+                            <form action="/user/auth/" method="post">
+                                <div class="form-group my-4 mx-uto">
+                                    {% csrf_token %}
+
+                                    <label class="mt-1"> {{ login_form.username.label }} </label>
+                                    {{ login_form.username }}
+                                    {{ login_error.username|escape }}
+
+                                    <label class="mt-1"> {{ login_form.password.label }} </label>
+                                    {{ login_form.password }}
+                                    {{ login_error.password }}
+                                    <button class="btn btn-primary mx-auto mt-3 w-100" type="submit"
+                                        name="login">LOGIN</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
+        </div>
+        <div class="row">
+            <h2 class="text-center my-2 font-italic">
+                “Medicine is not a science; it is empiricism founded on a network of blunders.” - Emmet Densmore
+                <h2>
         </div>
 
     </div>
-    <div class="row">
-        <h2 class="text-center my-2 font-italic">
-            “Medicine is not a science; it is empiricism founded on a network of blunders.” - Emmet Densmore
-            <h2>
-    </div>
+</body>
 
-</div>
-{% endblock %}
+</html>

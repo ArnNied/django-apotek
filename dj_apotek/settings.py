@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
     'apotek.apps.ApotekConfig',
     'kelas_terbuka.apps.KelasTerbukaConfig',
 ]
@@ -137,3 +136,5 @@ LOGIN_URL = '/user/auth/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'templates/static')
 
 MEDIA_URL = '/media/'
+
+# AUTH_USER_MODEL = 'apotek.ApotekUser'

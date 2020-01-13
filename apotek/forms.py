@@ -2,6 +2,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from .models import ApotekUser
 
 # class LoginForm(forms.ModelForm):
 #     class Meta:
@@ -17,8 +18,6 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control mb-2'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control mb-2'}),
             'username': forms.TextInput(attrs={'class': 'form-control mb-2'}),
             'email': forms.EmailInput(attrs={'class': 'form-control mb-2'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control mb-2'}),
@@ -40,12 +39,15 @@ class LoginForm(forms.Form):
         widget=forms.PasswordInput(attrs={'class': 'form-control mb-2'})
     )
 
-class SearchForm(forms.Form):
-    search=forms.CharField(
-        max_length=255,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Search'}),
-        required=False
-    )
+class ApotekUserForm(forms.ModelForm):
+    class Meta:
+        model = ApotekUser
+        fields = ['age', 'gender',]
+        widgets = {
+            'age': forms.NumberInput(attrs={'class': 'form-control mb-2'}),
+            'gender': forms.RadioSelect(attrs={'class': 'form-check-input'}),
+        }
+
 
 
 

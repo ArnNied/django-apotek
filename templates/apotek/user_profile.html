@@ -1,0 +1,68 @@
+{% extends 'apotek/base.html' %}
+
+{% block content %}
+<div class="container-fluid aqua-gradient mt-1">
+    <div class="row">
+        <div class="col-11 py-5 mx-auto bg-white">
+            <div class="row">
+                <div class="col-6 p-0">
+                    <div class="card col-12 mt-5 shadow-none">
+
+                        <img class="card-img-top mx-auto" src="{{ user.apotekuser.image.url }}"
+                            alt="{{ user.username }}" style="width: 300px; height: 300px;">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">{{ user.username }}</h4>
+                            <ul class="list-unstyled">
+                                <li class="nav-item font-weight-bold">Full Name:</li>
+                                <li class="nav-item">{{ user.first_name }} {{ user.last_name }}</li>
+                                <li class="nav-item font-weight-bold">E-mail:</li>
+                                <li class="nav-item">{{ user.email }}</li>
+                                <li class="nav-item font-weight-bold">Balance:</li>
+                                <li class="nav-item">Rp. {{ user.apotekuser.balance }}</li>
+                                <li class="nav-item font-weight-bold">Date Joined:</li>
+                                <li class="nav-item">{{ user.date_joined }}</li>
+                                <li class="nav-item font-weight-bold">Gender:</li>
+                                <li class="nav-item">{{ user.apotekuser.gender }}</li>
+                                <li class="nav-item font-weight-bold">Age:</li>
+                                <li class="nav-item">{{ user.apotekuser.age }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mt-5">
+                    <h2 class="text-center">PROFILE</h2>
+                    <form action="system/user/profilUpdate.php" method="post" enctype="multipart/form-data">
+                        <div class="form-group my-4 mx-auto">
+                            <div class="form-check form-check-inline">
+                                {{ apotekuser.gender.1 }}
+                            </div>
+                            <div class="form-check form-check-inline">
+                                {{ apotekuser.gender.2 }}
+                            </div>
+                            <button class="btn btn-danger mx-auto mt-3 w-100" type="submit" name="profile"
+                                value="<?= $user['id'] ?>">UPDATE</button>
+                        </div>
+                    </form>
+                    <h3 class="text-center">EMAIL & PASSWORD</h3>
+                    <form action="system/user/profilUpdate.php" method="post">
+                        <div class="form-group my-4 mx-auto">
+                            <input class="form-control my-3" type="text" placeholder="E-mail" name="email"
+                                autocomplete="off" value="{{ user.email }}" required>
+                            <input class="form-control my-3" type="password" placeholder="New password (Optional)"
+                                name="new_password" autocomplete="off">
+                            <input class="form-control my-3" type="password" placeholder="Confirm new password"
+                                name="cnew_password" autocomplete="off">
+                            <input class="form-control my-3" type="password" placeholder="Current password (Required)"
+                                name="cur_password" autocomplete="off" required>
+                            <button class="btn btn-danger mx-auto mt-3 w-100" type="submit" name="epass"
+                                value="{{ user.id }}">UPDATE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
