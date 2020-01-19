@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apotek.apps.ApotekConfig',
-    'kelas_terbuka.apps.KelasTerbukaConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
