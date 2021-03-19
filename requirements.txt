@@ -6,7 +6,7 @@ django-appconf==1.0.3
 django-compressor==2.3
 django-crispy-forms==1.8.1
 django-extensions==2.2.5
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 isort==4.3.21
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
